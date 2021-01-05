@@ -83,4 +83,6 @@ if __name__ == '__main__':
     download_challs = [x for x in web.challs if x['category'] == 'babyheap']
     for chall in download_challs:
         web.download_one_chall(chall, './challs')
+    # somewhat of a proof of concept for submitting a challenge as well
+    web.submit('example_id', 'example_flag')
 
