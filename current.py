@@ -67,13 +67,38 @@ class Web(object):
 
     def submit(self, challenge_id, flag):
         """
+        submit flag
+        """
+
+        url = self.url + 'api/v1/challenges/attempt'
+        header = {'csrf-token': challenge_id, 'submission': flag}
+        data = {'challenge_id': challenge_id, 'submission': flag}
+        res = self.session.post(url, headers=header, json=data).json()
+
+        assert 'success' in res and res['success']
+        print(res['data'])
+        return
+
+    def download_challs(self, chall, folder):
+        """
+        download all challenge binaries into a local folder
+        """
+
+        for chall in challs:
+            self.download_one_chall(chall, folder)
+
+    def download_one_chall(self, chall, folder):
+        """
         download one single challenge binary into a local folder
         """
 
-        print('Downloading %s' % chall['name'])
-        subprocess.call(["scp", "-i", os.path.expanduser("~/.ssh/id_rsa"), "cse466@cse466.pwn.college:%s" % path, folder])
+        print('Downloading %s' % chall['name']
+        self.workon(chall['id'])
+        path = '%s_%s' % (chall['category'], chall['name'])
+        subprocess.call(["scp", "-i", os.path.expanduser("ADD_LATER"),
+                        "cse466@cse466.pwn.college:%s" % path, folder])
         assert os.path.exists(os.path.join(folder, os.path.basename(path)))
-
+ 
 if __name__ == '__main__':
     import sys
 
