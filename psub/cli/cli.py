@@ -10,24 +10,22 @@ def resolve_conf_path():
     Returns:
         str: The string representing the path to the configuration file
     """
-    conf_path_modern = '~/.config/.psub.toml'
-    conf_path_traditional = '~/.psub.toml'
-    conf_path_absolute = '/etc/psub.toml'
+    
+    modern_path = Path.home() / '.config' / '.psub.toml' 
+    trad_path = Path.home() / '.psub.toml'
+    abs_path = Path(conf_path_absolute)
 
     # check for the file in .config
-    path = Path(conf_path_modern) 
-    if (path.exists()):
-        return conf_path_modern
+    if (modern_path.exists()):
+        return str(modern_path) 
     # check for the file in ~
-    path = Path(conf_path_traditional)
-    elif (path.exists()):
-        return conf_path_traditional
+    elif (trad_path.exists()):
+        return str(trad_path) 
     # revert to /etc conf file
-    path = Path(conf_path_absolute)
-    elif (path.exists()):
-        return conf_path_absolute
+    elif (abs_path.exists()):
+        return str(abs_path) 
     else:
-        return 'NAN'
+        return 'NE'
 
 def get_conf(path):
     """
@@ -39,5 +37,4 @@ def get_conf(path):
     """
     
     pass
-
 
