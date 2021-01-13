@@ -1,6 +1,7 @@
 import pytest
 import os
 from pathlib import Path
+import psub.cli.cli 
 
 toml_str = """
 title = "PSUB TOML configuration file"
@@ -18,25 +19,28 @@ Origin = "https://cse466.pwn.college"
 
 """
 
-def test_modern_resolve_conf_path_fail():
+def test__resolve_conf_path_fail():
     # setup file system for test fail
-    p = Path.home() / '.config' / '.psub.toml'
+    p = Path.home() / '.psub.toml' 
     if(p.exists()):
         os.remove(str(p))
 
+    p = Path.home() / '.config' / '.psub.toml' 
+    if(p.exists()):
+        os.remove(str(p))
+
+    p = Path('/etc/.psub.toml')
+    if(p.exists()):
+        os.remove(str(p))
+
+   assert psub.cli.cli.resolve_conf_path() == 'NE'
 
 def test_modern_resolve_conf_path_pass():
-    pass
-
-def test_trad_resolve_conf_path_fail():
     pass
     
 def test_trad_resolve_conf_path_pass():
     pass
-
-def test_abs_resolve_conf_path_fail():
-    pass
     
 def test_abs_resolve_conf_path_pass():
     pass
-    
+
