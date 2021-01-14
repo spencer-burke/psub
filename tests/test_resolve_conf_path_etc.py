@@ -3,6 +3,12 @@ import os
 from pathlib import Path
 import psub.cli.cli 
 
+"""
+If you are running this test you must make sure to run it in an elevated environment.
+Since it is checking for a file in /etc/.
+Also, run the test with the "/etc/.psub.toml" file not existing.
+"""
+
 toml_str = """
 title = "PSUB TOML configuration file"
 
@@ -18,29 +24,10 @@ Content-Type = "application/json"
 Origin = "https://cse466.pwn.college"
 
 """
-
-def test__resolve_conf_path_fail():
-    # setup file system for test fail
-    p = Path.home() / '.psub.toml' 
-    if(p.exists()):
-        os.remove(str(p))
-
-    p = Path.home() / '.config' / '.psub.toml' 
-    if(p.exists()):
-        os.remove(str(p))
-
-    p = Path('/etc/.psub.toml')
-    if(p.exists()):
-        os.remove(str(p))
-
-   assert psub.cli.cli.resolve_conf_path() == 'NE'
-
-def test_modern_resolve_conf_path_pass():
-    pass
-    
-def test_trad_resolve_conf_path_pass():
-    pass
-    
+ 
 def test_abs_resolve_conf_path_pass():
-    pass
 
+    with open('/etc/.psub.toml', 'w') as f:
+        f.write(toml_str)
+
+    assert psub.cli.cli.resolve_conf_path() == '/etc/.psub.toml' 
