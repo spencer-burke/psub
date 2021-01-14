@@ -13,7 +13,7 @@ def resolve_conf_path():
     
     modern_path = Path.home() / '.config' / '.psub.toml' 
     trad_path = Path.home() / '.psub.toml'
-    abs_path = Path(conf_path_absolute)
+    abs_path = Path('/etc/.psub.toml')
 
     # check for the file in .config
     if (modern_path.exists()):
