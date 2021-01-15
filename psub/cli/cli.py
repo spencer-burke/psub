@@ -1,6 +1,3 @@
-# get configuration information from toml file
-    # resolve paths for conf file and return as valid string
-    # get conf options from file and then return dictionary
 import toml
 import click
 from pathlib import Path
@@ -35,6 +32,12 @@ def get_conf(path):
     Returns:
         dict: A dictionary containing all of the configuration parameters
     """
-    
-    pass
+
+    conf_path = resolve_conf_path()
+    toml_data = "" 
+     
+    with open(conf_path, 'r') as f:
+        toml_data = f.read() 
+
+    return toml.loads(toml_data)
 
