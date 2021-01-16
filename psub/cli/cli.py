@@ -41,3 +41,18 @@ def get_conf(path):
 
     return toml.loads(toml_data)
 
+@click.group()
+def main():
+    # nothing within the main the method yet
+    pass
+
+# display all challenges(this feature will be improved later)
+
+# login
+
+# submit flags
+
+# batch submit flags
+
+# pull down a specific challenge
+
