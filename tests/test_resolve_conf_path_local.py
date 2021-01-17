@@ -12,7 +12,6 @@ User-Agent = "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:84.0) Gecko/20100101 Fi
 Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
 Accept-Language = "en-US,en;q=0.5"
 Accept-Encoding = "gzip, deflate, br"
-Accept-Language = "en-US,en;q=0.5"
 Referer = "https://cse466.pwn.college/login"
 Content-Type = "application/json"
 Origin = "https://cse466.pwn.college"

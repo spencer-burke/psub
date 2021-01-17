@@ -24,7 +24,7 @@ def resolve_conf_path():
     else:
         return 'NE'
 
-def get_conf(path):
+def get_conf():
     """
     Args:
         path (str): The location of the configuration file in the file system
@@ -34,12 +34,8 @@ def get_conf(path):
     """
 
     conf_path = resolve_conf_path()
-    toml_data = "" 
-     
-    with open(conf_path, 'r') as f:
-        toml_data = f.read() 
-
-    return toml.loads(toml_data)
+    return toml.load(conf_path)
+    
 
 @click.group()
 def main():
