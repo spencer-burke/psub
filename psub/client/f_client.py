@@ -29,7 +29,7 @@ def challenges(url, session):
         password (str): the password being used to authenticate to pwncollege
 
     Returns:
-        boolean: whether the authentication was successful
+       (array(dict)): An array of dictionaries containing information on current pwncollege challenge 
     """
 
     data = session.get(f'{url}/api/v1/challenges').json()['data']
@@ -42,9 +42,22 @@ def challenges(url, session):
     } for challenge in data]
 
 # coming back to this as it needs a lot of work
-def work_on(challenge_id, binary = None):
+def work_on(url, session, challenge_id, binary = None, practice, HEADERS):
+    """
+    Args:
+        url (str): The url to connect to
+        session (requests session object): The requests session object being used for the connection
+        challenge_id (str): The id of the challenge to work on
+        binary (dict): The binary challenge dictionary which contains all of the information needed to work on a binary challenge
+        practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
+        HEADERS (dict): The headers needed to make the request to work on the challenge
+
+    Returns:
+       ???? (???): Ok, so I think this returns a string, but I have no idea 
+    """
+
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
-                     self.session.get(f'{self.url}/challenges').text)['csrf']
+                     session.get(f'{url}/challenges').text)['csrf']
     if binary:
         JSON = {
                 "challenge_id": challenge_id,
@@ -56,21 +69,10 @@ def work_on(challenge_id, binary = None):
                 "challenge_id": challenge_id,
                 "practice": "false",
                 }
-        
-    HEADERS = {
-            'Host': 'cse466.pwn.college',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0',
-            'Accept': 'application/json',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Referer': 'https://cse466.pwn.college/challenges',
-            'Content-Type': 'application/json',
-            'CSRF-Token': csrf,
-            'Origin': 'https://cse466.pwn.college'
-            }
-
-    response = self.session.post(f'{self.url}/pwncollege_api/v1/docker', headers=HEADERS, json=JSON)
+    
+    response = session.post(f'{url}/pwncollege_api/v1/docker', headers=HEADERS, json=JSON)
     print(response)
+
     return response.json()['success']
 
 def submit_flag(url, session, challenge_id, flag, HEADERS):
