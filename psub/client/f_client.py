@@ -42,32 +42,42 @@ def challenges(url, session):
     } for challenge in data]
 
 # coming back to this as it needs a lot of work
-def work_on(url, session, challenge_id, binary = None, practice, HEADERS):
+def work_on(url, session, challenge_id, binary = None, is_practice, HEADERS):
     """
     Args:
         url (str): The url to connect to
         session (requests session object): The requests session object being used for the connection
         challenge_id (str): The id of the challenge to work on
         binary (dict): The binary challenge dictionary which contains all of the information needed to work on a binary challenge
-        practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
+        ^^^ this is currently in the works, the dict will have the challenge_id 
+        ^^^ the selected_path of the challenge binary(this feature might not even be implemented as the pwncollege infrastructure might change)
+        is_practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
         HEADERS (dict): The headers needed to make the request to work on the challenge
 
     Returns:
-       ???? (???): Ok, so I think this returns a string, but I have no idea 
+       ???? (???): Ok, so I think this returns a string, but I have no idea as of now
     """
 
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
                      session.get(f'{url}/challenges').text)['csrf']
+
+    practice = ""
+
+    if(is_practice):
+        practice = "false"  
+    else:
+        practice = "true"
+
     if binary:
         JSON = {
                 "challenge_id": challenge_id,
-                "practice": "false",
+                "practice": practice,
                 "selected_path": "/bin/cat"
                 }
     else:
         JSON = {
                 "challenge_id": challenge_id,
-                "practice": "false",
+                "practice": practice,
                 }
     
     response = session.post(f'{url}/pwncollege_api/v1/docker', headers=HEADERS, json=JSON)
