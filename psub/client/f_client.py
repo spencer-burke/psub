@@ -83,6 +83,7 @@ def work_on(url, session, challenge_id, binary = None, is_practice, HEADERS):
     response = session.post(f'{url}/pwncollege_api/v1/docker', headers=HEADERS, json=JSON)
     print(response)
 
+    print(type(response.json()['success']))
     return response.json()['success']
 
 def submit_flag(url, session, challenge_id, flag, HEADERS):
