@@ -3,13 +3,13 @@ import sys
 import getpass
 import re
 
-import pwncollege_client
+from client import Client 
 
 def main():
     username = input('username: ')
     password = getpass.getpass('password: ')
 
-    client = pwncollege_client.Client()
+    client = Client()
     logged_in = client.login(username, password)
 
     if not logged_in:
@@ -18,6 +18,9 @@ def main():
 
     for challenge in client.challenges():
         print(challenge)
+    
+    client.work_on(101)
+    print(type(client.work_on(101)))
 
 if __name__ == '__main__':
     main()
