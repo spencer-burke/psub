@@ -1,4 +1,5 @@
 import re
+import base64
 import requests
 
 def login(url, session, username, password):
@@ -55,7 +56,7 @@ def work_on(url, session, challenge_id, binary = None, is_practice, HEADERS):
         HEADERS (dict): The headers needed to make the request to work on the challenge
 
     Returns:
-       ???? (???): Ok, so I think this returns a string, but I have no idea as of now
+       bool: whether the request was successful 
     """
 
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
@@ -83,8 +84,71 @@ def work_on(url, session, challenge_id, binary = None, is_practice, HEADERS):
     response = session.post(f'{url}/pwncollege_api/v1/docker', headers=HEADERS, json=JSON)
     print(response)
 
+    # this needs to be removed
     print(type(response.json()['success']))
     return response.json()['success']
+
+def gen_chal_url(challenge_id):
+    """
+    Args:
+        challenge_id (int): The challenge id that is going to be requested
+
+    Returns:
+        str: The url to make the request to for the challenge
+    """
+
+    pwn_url_part = "https://cse466.pwn.college/download/"
+    
+    challenge_str = "{\"challenge_id\":%d}" % (id)
+    challenge_str_bytes = base64.urlsafe_b64encode(challenge_str.encode("utf-8"))
+    challenge_str_decoded = str(challenge_str_bytes, "utf-8")
+
+    return challenge_str_decoded
+
+# two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
+def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
+    """
+    Args:
+        url (str): The url to connect to (this might not be used)
+        session (requests session object): The requests session object being used for the connection
+        challenge_id (str): The id of the challenge to work on
+        is_practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
+        HEADERS (dict): The headers needed to make the request to work on the challenge
+
+    Returns:
+       ????: ???? as of now this is undecided as the details are still being worked on what to return 
+    """
+
+    # get the csrf token
+    csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
+                     session.get(f'{url}/challenges').text)['csrf']
+
+    # get the practice variable ready for the request
+    practice = ""
+
+    if(is_practice):
+        practice = "false"  
+    else:
+        practice = "true"
+
+    # prepare the json for the request
+    JSON = {
+            "challenge_id": challenge_id,
+            "practice": practice,
+            }
+
+"""
+prepare the request url
+pwncollege download eyJjaGFsbGVuZ2VfaWQiOjEwMn0=
+https://cse466.pwn.college/download/(base64encode of {"challenge_id":id}
+"""
+
+# make the request to download the challenge
+
+
+# two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
+def work_on_bin():
+    pass
 
 def submit_flag(url, session, challenge_id, flag, HEADERS):
     """
