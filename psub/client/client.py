@@ -99,9 +99,9 @@ def gen_chal_url(challenge_id):
 
     pwn_url_part = "https://cse466.pwn.college/download/"
     
-    challenge_str = "{\"challenge_id\":%d}" % (id)
+    challenge_str = "{\"challenge_id\":%d}" % (challenge_id)
     challenge_str_bytes = base64.urlsafe_b64encode(challenge_str.encode("utf-8"))
-    challenge_str_decoded = str(challenge_str_bytes, "utf-8")
+    challenge_str_decoded = pwn_url_part + str(challenge_str_bytes, "utf-8")
 
     return challenge_str_decoded
 
