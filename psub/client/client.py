@@ -116,7 +116,7 @@ def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
         HEADERS (dict): The headers needed to make the request to work on the challenge
 
     Returns:
-       ????: ???? as of now this is undecided as the details are still being worked on what to return 
+        bool: whether the request was successful or not 
     """
 
     # get the csrf token
@@ -137,8 +137,10 @@ def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
     #        "practice": practice,
     #        }
    
-    """ code to add the csrf token to the challenge """
+    HEADERS.update(CSRF-Token = csrf)
+
     response = session.get(gen_chal_url(challenge_id), headers=HEADERS) 
+
     return response.json()['success'] 
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
