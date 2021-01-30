@@ -123,28 +123,23 @@ def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
                      session.get(f'{url}/challenges').text)['csrf']
 
-    # get the practice variable ready for the request
-    practice = ""
+    ## get the practice variable ready for the request
+    #practice = ""
 
-    if(is_practice):
-        practice = "false"  
-    else:
-        practice = "true"
+    #if(is_practice):
+    #    practice = "false"  
+    #else:
+    #    practice = "true"
 
-    # prepare the json for the request
-    JSON = {
-            "challenge_id": challenge_id,
-            "practice": practice,
-            }
-
-"""
-prepare the request url
-pwncollege download eyJjaGFsbGVuZ2VfaWQiOjEwMn0=
-https://cse466.pwn.college/download/(base64encode of {"challenge_id":id}
-"""
-
-# make the request to download the challenge
-
+    ## prepare the json for the request
+    #JSON = {
+    #        "challenge_id": challenge_id,
+    #        "practice": practice,
+    #        }
+   
+    """ code to add the csrf token to the challenge """
+    response = session.get(gen_chal_url(challenge_id), headers=HEADERS) 
+    return response.json()['success'] 
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
 def work_on_bin():
