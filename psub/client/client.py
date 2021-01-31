@@ -106,7 +106,7 @@ def gen_chal_url(challenge_id):
     return challenge_str_decoded
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
-def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
+def work_on_chal(url='', session, challenge_id, is_practice='', HEADERS):
     """
     Args:
         url (str): The url to connect to (this might not be used)
@@ -136,8 +136,8 @@ def work_on_chal(url, session, challenge_id, is_practice, HEADERS):
     #        "challenge_id": challenge_id,
     #        "practice": practice,
     #        }
-   
-    HEADERS.update(CSRF-Token = csrf)
+     
+    HEADERS.update({'CSRF-Token':csrf})
 
     response = session.get(gen_chal_url(challenge_id), headers=HEADERS) 
 

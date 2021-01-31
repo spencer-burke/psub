@@ -2,10 +2,10 @@
 import sys
 import getpass
 import re
+from client import * 
+#from client import Client 
 
-from client import Client 
-
-def main():
+def old_main():
     username = input('username: ')
     password = getpass.getpass('password: ')
 
@@ -22,6 +22,17 @@ def main():
     client.work_on(101)
     print(type(client.work_on(101)))
 
+def main():
+    username = input('username: ')
+    password = getpass.getpass('password: ')
+
+    # get configuration information
+
+    # create the session
+
+    # use the config information with the session info to make the request
+    
 if __name__ == '__main__':
-    main()
+    pass
+#    main()
 
