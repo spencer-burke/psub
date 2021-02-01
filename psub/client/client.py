@@ -144,8 +144,26 @@ def work_on_chal(url='', session, challenge_id, is_practice='', HEADERS):
     return response.json()['success'] 
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
-def work_on_bin():
-    pass
+def work_on_bin(url='', session, challenge_id, is_practice='', HEADERS):
+    """
+    Args:
+        url (str): The url to connect to (this might not be used)
+        session (requests session object): The requests session object being used for the connection
+        challenge_id (str): The id of the challenge to work on
+        is_practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
+        HEADERS (dict): The headers needed to make the request to work on the challenge
+
+    Returns:
+        bool: whether the request was successful or not 
+    """
+
+    # get the csrf token
+    csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
+                     session.get(f'{url}/challenges').text)['csrf']
+
+    """
+    more work needs to be done on this as the differences between challenges and binaries have not been researched yet
+    """
 
 def submit_flag(url, session, challenge_id, flag, HEADERS):
     """
