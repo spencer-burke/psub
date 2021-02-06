@@ -3,6 +3,7 @@ import sys
 import getpass
 import re
 from client import * 
+from cli import *
 #from client import Client 
 
 def old_main():
@@ -27,12 +28,14 @@ def main():
     password = getpass.getpass('password: ')
 
     # get configuration information
+    conf = cli.get_conf()
 
     # create the session
+    pwn_session = requests.session()
 
     # use the config information with the session info to make the request
+    client.work_on_chal(pwn_session, 101, conf) 
     
 if __name__ == '__main__':
-    pass
-#    main()
+    main()
 
