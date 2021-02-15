@@ -1,6 +1,7 @@
 import re
 import base64
 import requests
+from requests.auth import HTTPBasicAuth
 
 def login(url, session, username, password):
     """
@@ -106,7 +107,7 @@ def gen_chal_url(challenge_id):
     return challenge_str_decoded
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
-def work_on_chal(url, session, challenge_id, HEADERS, is_practice=''):
+def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
     """
     Args:
         url (str): The url to connect to (this might not be used)
@@ -122,26 +123,15 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=''):
     # get the csrf token
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
                      session.get(f'{url}/challenges').text)['csrf']
+    
+    #HEADERS.update({'CSRF-Token':csrf})
+    HEADERS['CSRF-Token'] = csrf
+    
+    print(gen_chal_url(challenge_id))
+    response = session.get(gen_chal_url(challenge_id), headers=HEADERS, allow_redirects=True)
 
-    ## get the practice variable ready for the request
-    #practice = ""
-
-    #if(is_practice):
-    #    practice = "false"  
-    #else:
-    #    practice = "true"
-
-    ## prepare the json for the request
-    #JSON = {
-    #        "challenge_id": challenge_id,
-    #        "practice": practice,
-    #        }
-     
-    HEADERS.update({'CSRF-Token':csrf})
-
-    response = session.get(gen_chal_url(challenge_id), headers=HEADERS) 
-
-    return response.json()['success'] 
+    #return response.json()['success'] 
+    print(response)
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
 def work_on_bin(url, session, challenge_id, HEADERS, is_practice=''):

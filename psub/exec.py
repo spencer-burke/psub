@@ -31,6 +31,8 @@ def main():
     pwn_session = requests.session()
     pwn_url = "https://cse466.pwn.college"
 
+    client.login(pwn_url, pwn_session, username, password)
+
     # use the config information with the session info to make the request
     client.work_on_chal(pwn_url, pwn_session, 101, conf)
     # attempt to submit a flag
