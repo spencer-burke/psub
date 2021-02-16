@@ -1,6 +1,10 @@
 import toml
 import click
+import requests
 from pathlib import Path
+
+url='https://cse466.pwn.college'   
+session = requests.session() 
 
 def resolve_conf_path():
     """
@@ -26,16 +30,20 @@ def resolve_conf_path():
 
 def get_conf():
     """
-    Args:
-        path (str): The location of the configuration file in the file system
-
     Returns:
         dict: A dictionary containing all of the configuration parameters
     """
 
     conf_path = resolve_conf_path()
     return toml.load(conf_path)
-    
+
+def get_headers():
+    """
+        Returns:
+            dict: The request headers used in interacting with pwn college
+    """
+    params = get_conf()
+    return params 
 
 @click.group()
 def main():
