@@ -43,7 +43,7 @@ def get_headers():
             dict: The request headers used in interacting with pwn college
     """
     params = get_conf()
-    return params 
+    return params['headers'] 
 
 @click.group()
 def main():
