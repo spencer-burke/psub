@@ -9,8 +9,6 @@ def run_behaviour_work_on():
     client = psub.client.Client()
 
     # test getting the information from the terminal while inside a pytest
-    username = input('username: ')
-    password = getpass.getpass('password: ')
 
     # authenticate and then call work_on 
 
@@ -19,5 +17,6 @@ def run_behaviour_work_on():
 This is under development. 
 I am currently looking for ways to get the password and usrname in a secure method
 As pytest does really allow for input from stdin.
+THIS NEEDS TO BE REMOVED IT IS NO LONGER NEEDED
 """
 
