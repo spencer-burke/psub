@@ -120,18 +120,16 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
         bool: whether the request was successful or not 
     """
 
-    # get the csrf token
-    csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
-                     session.get(f'{url}/challenges').text)['csrf']
-    
-    #HEADERS.update({'CSRF-Token':csrf})
+    csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"', session.get(f'{url}/challenges').text)['csrf']
     HEADERS['CSRF-Token'] = csrf
     
-    print(gen_chal_url(challenge_id))
     response = session.get(gen_chal_url(challenge_id), headers=HEADERS, allow_redirects=True)
+    with open('new_file', 'w') as f:
+        f.write(response.content)
 
     #return response.json()['success'] 
-    print(response)
+    
+   
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
 def work_on_bin(url, session, challenge_id, HEADERS, is_practice=''):
