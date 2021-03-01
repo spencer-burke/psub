@@ -124,7 +124,7 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
     HEADERS['CSRF-Token'] = csrf
     
     response = session.get(gen_chal_url(challenge_id), headers=HEADERS, allow_redirects=True)
-    with open('new_file', 'w') as f:
+    with open(str(challenge_id)), 'w') as f:
         f.write(response.content)
 
     #return response.json()['success'] 
@@ -132,6 +132,7 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
    
 
 # two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
+# get rid of this, pwn.college is changing the challenge type to be different
 def work_on_bin(url, session, challenge_id, HEADERS, is_practice=''):
     """
     Args:
