@@ -43,6 +43,9 @@ def challenges(url, session):
         'value': challenge['value']
     } for challenge in data]
 
+def build_table(url, session):
+    pass
+
 # coming back to this as it needs a lot of work
 def work_on(url, session, challenge_id, is_practice, HEADERS, binary = None):
     """
@@ -127,32 +130,7 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
     with open(str(challenge_id)), 'w') as f:
         f.write(response.content)
 
-    #return response.json()['success'] 
-    
-   
-
-# two functions are being made as of now to make functionality easier, and to prototype funcitonality easier
-# get rid of this, pwn.college is changing the challenge type to be different
-def work_on_bin(url, session, challenge_id, HEADERS, is_practice=''):
-    """
-    Args:
-        url (str): The url to connect to (this might not be used)
-        session (requests session object): The requests session object being used for the connection
-        challenge_id (str): The id of the challenge to work on
-        is_practice (boolean): Whether the challenge being worked on is a practice challenge or a test challenge
-        HEADERS (dict): The headers needed to make the request to work on the challenge
-
-    Returns:
-        bool: whether the request was successful or not 
-    """
-
-    # get the csrf token
-    csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
-                     session.get(f'{url}/challenges').text)['csrf']
-
-    """
-    more work needs to be done on this as the differences between challenges and binaries have not been researched yet
-    """
+    return response.json()['success'] 
 
 def submit_flag(url, session, challenge_id, flag, HEADERS):
     """
