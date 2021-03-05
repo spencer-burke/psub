@@ -1,4 +1,5 @@
 import re
+import toml
 import base64
 import requests
 from requests.auth import HTTPBasicAuth
@@ -27,8 +28,6 @@ def challenges(url, session):
     Args:
         url (str): The url to connect to
         session (requests session object): The requests session object being used for the connection
-        username (str): the username being used to authenticate to pwncollege
-        password (str): the password being used to authenticate to pwncollege
 
     Returns:
        (array(dict)): An array of dictionaries containing information on current pwncollege challenge 
@@ -43,8 +42,17 @@ def challenges(url, session):
         'value': challenge['value']
     } for challenge in data]
 
-def build_table(url, session):
-    pass
+def build_table(url, session, storage_file):
+    """
+    Args:
+        url (str): The url to connect to
+        session (requests session object): The requests session object being used for the connection
+        storage_file (str): the absolute path containing the name of the storage file where the information for all of the challenges will be kept
+    """ 
+    chals = challenges(url, session)
+    toml_string = toml.dump(chals)
+    with open(storage_file, "a") as f:
+       f.write(toml_string) 
 
 # coming back to this as it needs a lot of work
 def work_on(url, session, challenge_id, is_practice, HEADERS, binary = None):
