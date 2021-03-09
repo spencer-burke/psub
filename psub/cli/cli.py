@@ -45,6 +45,13 @@ def get_headers():
     params = get_conf()
     return params['headers'] 
 
+def get_storage_path():
+    """
+        Returns:
+            dict: The path to the storage file, to store all of the data on the challenges 
+    """
+    pass
+
 @click.group()
 def main():
     # nothing within the main the method yet
