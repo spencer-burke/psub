@@ -69,18 +69,24 @@ def main():
 def cli():
     pass
 
-# display all challenges(this feature will be improved later)
 @cli.command() 
 def display_challenges():
+    # this feature will be improved later
     pass
 
 @cli.command()
 def login():
     pass    
 
-# submit flags
+@cli.command()
+def submit_flags():
+    pass
 
-# batch submit flags
+@cli.command():
+def submit_flags_batch():
+    pass
 
-# pull down a specific challenge
+@cli.command()
+def get_challenge():
+    pass
 
