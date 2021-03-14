@@ -52,14 +52,31 @@ def get_storage_path():
     """
     pass
 
-@click.group()
+def get_chal_file_path():
+    """
+        Returns:
+            dict: The path to the storage file, to store all of the data on the challenges 
+    """
+    pass
+
+if __name__ == "__main__":
+    main()
+
 def main():
-    # nothing within the main the method yet
+    cli()
+
+@click.group()
+def cli():
     pass
 
 # display all challenges(this feature will be improved later)
+@cli.command() 
+def display_challenges():
+    pass
 
-# login
+@cli.command()
+def login():
+    pass    
 
 # submit flags
 
