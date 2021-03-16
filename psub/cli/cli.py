@@ -2,6 +2,7 @@ import toml
 import click
 import requests
 from pathlib import Path
+from client import *
 
 url='https://cse466.pwn.college'   
 session = requests.session() 
@@ -76,6 +77,8 @@ def display_challenges():
 
 @cli.command()
 def login():
+    # get the info required to login
+    # pass it to the login function
     pass    
 
 @cli.command()
