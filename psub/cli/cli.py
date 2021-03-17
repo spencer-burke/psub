@@ -8,6 +8,10 @@ from client import *
 url='https://cse466.pwn.college'   
 session = requests.session() 
 
+"""
+    Get a list of return codes working
+"""
+
 def resolve_conf_path():
     """
     Returns:
@@ -71,28 +75,30 @@ def main():
 def cli():
     pass
 
-@cli.command() 
+@click.command() 
 def display_challenges():
     # this feature will be improved later
     pass
 
-@cli.command()
-def login(session, url="https://cse466.pwn.college"):
-    # pass it to the login function
+@click.command()
+def login(session):
+    url="https://cse466.pwn.college"
     username = input('username: ')
     password = getpass.getpass('password: ')
 
     client.login(url, session, username, password)
 
-@cli.command()
+@click.command()
+@click.option('--flag', help='The flag to submit')
+@click.option('--batch', default=False, help='Tell the cli to batch submit flags')
 def submit_flags():
-    pass
+    pass 
 
-@cli.command():
+@click.command():
 def submit_flags_batch():
     pass
 
-@cli.command()
+@click.command()
 def get_challenge():
     pass
 
