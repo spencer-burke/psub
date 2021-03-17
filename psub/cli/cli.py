@@ -1,6 +1,7 @@
 import toml
 import click
 import requests
+import getpass
 from pathlib import Path
 from client import *
 
@@ -76,10 +77,12 @@ def display_challenges():
     pass
 
 @cli.command()
-def login():
-    # get the info required to login
+def login(session, url="https://cse466.pwn.college"):
     # pass it to the login function
-    pass    
+    username = input('username: ')
+    password = getpass.getpass('password: ')
+
+    client.login(url, session, username, password)
 
 @cli.command()
 def submit_flags():
