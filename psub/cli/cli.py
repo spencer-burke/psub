@@ -82,6 +82,9 @@ def display_challenges():
 
 @click.command()
 def login(session):
+    """
+        session(Requests session object): the session that will be used to connect to pwncollege
+    """
     url="https://cse466.pwn.college"
     username = input('username: ')
     password = getpass.getpass('password: ')
@@ -91,8 +94,12 @@ def login(session):
 @click.command()
 @click.option('--flag', help='The flag to submit')
 @click.option('--batch', default=False, help='Tell the cli to batch submit flags')
-def submit_flags():
-    pass 
+def submit_flags(flag, batch, session, challenge_id, HEADERS):
+    url="https://cse466.pwn.college"
+    if (batch == False):
+        client.submit_flag(url, session, challenge_id, flag, HEADERS)
+    else:
+        pass # this needs a lot of work
 
 @click.command():
 def submit_flags_batch():
