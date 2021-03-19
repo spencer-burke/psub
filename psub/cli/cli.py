@@ -89,11 +89,15 @@ def login(session):
     username = input('username: ')
     password = getpass.getpass('password: ')
 
-    client.login(url, session, username, password)
+    success = client.login(url, session, username, password)
+    if(sucess):
+        print("[SUCCESS] Logged In")
+    else:
+        print("[ERROR] Error Logging In")
 
 @click.command()
 @click.option('--flag', help='The flag to submit')
-@click.option('--batch', default=False, help='Tell the cli to batch submit flags')
+@click.option('--batch', default=False, help='Tell the cli to batch submit flags from the batch file')
 def submit_flags(flag, batch, session, challenge_id, HEADERS):
     url="https://cse466.pwn.college"
     if (batch == False):
