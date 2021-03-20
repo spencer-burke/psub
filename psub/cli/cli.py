@@ -105,11 +105,11 @@ def submit_flags(flag, batch, session, challenge_id, HEADERS):
     else:
         pass # this needs a lot of work
 
-@click.command():
-def submit_flags_batch():
-    pass
-
 @click.command()
-def get_challenge():
-    pass
+@click.option('--cid', default='0', help='The id of the challenge to get')
+@click.option('--name', default='null', help='The name of the challenge to get')
+@click.option('--practice', default='null', help='Whether to get the practice version of the challenge')
+def get_challenge(cid, name, practice, session, HEADERS):
+    url="https://cse466.pwn.college"
+    client.work_on_chal(url, session, cid, HEADERS, practice)
 
