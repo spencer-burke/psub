@@ -135,8 +135,8 @@ def work_on_chal(url, session, challenge_id, HEADERS, is_practice=False):
     HEADERS['CSRF-Token'] = csrf
     
     response = session.get(gen_chal_url(challenge_id), headers=HEADERS, allow_redirects=True)
-    with open(str(challenge_id)), 'w') as f:
-        f.write(response.content)
+    with open(str(challenge_id), 'w') as f:
+        f.write(str(response.content))
 
     return response.json()['success'] 
 
@@ -156,6 +156,8 @@ def submit_flag(url, session, challenge_id, flag, HEADERS):
     csrf = re.search('\'csrfNonce\': "(?P<csrf>.*?)"',
                          session.get(f'{url}/challenges').text)['csrf']
 
+    HEADERS['CSRF-Token'] = csrf
+
     JSON = {
             "challenge_id": challenge_id,
             "submission": flag
@@ -164,5 +166,5 @@ def submit_flag(url, session, challenge_id, flag, HEADERS):
     response = session.post(f'{url}/api/v1/challenges/attempt', headers=HEADERS, json=JSON)
 
     # this returns whether the flag was correct or already solved
-    return response.json()['success'] == True and response.json()['data']['status'] in ['correct', 'already_solved']
-
+    #return response.json()['success'] == True and response.json()['data']['status'] in ['correct', 'already_solved']
+    print(response.json())

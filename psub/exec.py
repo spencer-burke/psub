@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import sys
+import requests
 import getpass
 import re
-from client import * 
-from cli import *
+import client  
+import cli 
 #from client import Client 
 
 def old_main():
@@ -36,9 +37,9 @@ def main():
     client.login(pwn_url, pwn_session, username, password)
 
     # use the config information with the session info to make the request
-    client.work_on_chal(pwn_url, pwn_session, 101, headers)
+    #client.work_on_chal(pwn_url, pwn_session, 101, headers)
     # attempt to submit a flag
-    client.submit_flag(pwn_url, pwn_session, "pwn_college{MK9noUdT-C1gNN5Spyd6IqDUexB.dFDMxwCN4UzW}", headers)
+    client.submit_flag(pwn_url, pwn_session, 101, "pwn_college{MK9noUdT-C1gNN5Spyd6IqDUexB.dFDMxwCN4UzW}", headers)
 
 def c_main():
     """
