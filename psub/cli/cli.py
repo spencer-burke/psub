@@ -43,6 +43,27 @@ def get_conf():
     conf_path = resolve_conf_path()
     return toml.load(conf_path)
 
+def resolve_chal_path():
+    """
+    Returns:
+        str: The string representing the path to the configuration file
+    """
+    modern_path = Path.home() / '.config' / '.psub.chal' 
+    trad_path = Path.home() / '.psub.chal'
+    abs_path = Path('/etc/.psub.chal')
+
+    # check for the file in .config
+    if (modern_path.exists()):
+        return str(modern_path) 
+    # check for the file in ~
+    elif (trad_path.exists()):
+        return str(trad_path) 
+    # revert to /etc conf file
+    elif (abs_path.exists()):
+        return str(abs_path) 
+    else:
+        return 'NE'
+
 def get_headers():
     """
         Returns:
