@@ -43,7 +43,7 @@ def get_conf():
     conf_path = resolve_conf_path()
     return toml.load(conf_path)
 
-def resolve_chal_path():
+def resolve_chal_path_no_config():
     """
     Returns:
         str: The string representing the path to the configuration file
@@ -63,6 +63,8 @@ def resolve_chal_path():
         return str(abs_path) 
     else:
         return 'NE'
+
+
 
 def get_headers():
     """
