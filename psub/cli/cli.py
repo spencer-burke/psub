@@ -7,6 +7,7 @@ from client import *
 
 url='https://cse466.pwn.college'   
 session = requests.session() 
+executed_first_time = False
 
 """
     Get a list of return codes working
@@ -64,8 +65,6 @@ def resolve_chal_path_no_config():
     else:
         return 'NE'
 
-
-
 def get_headers():
     """
         Returns:
@@ -86,6 +85,9 @@ def get_chal_file_path():
         Returns:
             dict: The path to the storage file, to store all of the data on the challenges 
     """
+    pass
+
+def configuration_preliminaries():
     pass
 
 if __name__ == "__main__":
