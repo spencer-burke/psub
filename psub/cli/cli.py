@@ -101,6 +101,7 @@ def cli():
     pass
 
 @click.command() 
+@click.option('--help', default='null', help='Display all of the challenges on pwn.college')
 def display_challenges():
     # this feature will be improved later
     pass
