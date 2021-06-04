@@ -5,7 +5,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 class Client:
-    pass
+    url = "https://cse466.pwn.college"
 
 def login(url, session, username, password):
     """
