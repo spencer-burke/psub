@@ -4,9 +4,6 @@ import base64
 import requests
 from requests.auth import HTTPBasicAuth
 
-class Client:
-    url = "https://cse466.pwn.college"
-
 def login(url, session, username, password):
     """
     Args:
